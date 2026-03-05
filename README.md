@@ -48,3 +48,4 @@ Ensuite, vous pouvez utiliser `copilot` comme si l'outil était installé native
 ```bash
 copilot "Explique comment utiliser docker-compose"
 ```
+
