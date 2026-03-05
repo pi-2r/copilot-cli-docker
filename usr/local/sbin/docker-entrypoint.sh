@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu
+
+USER_ID=${HOST_UID:-1000}
+GROUP_ID=${HOST_GID:-1000}
+USER=${DEFAULT_USERNAME:-copilot}
+HOME=${DEFAULT_HOME_DIR:-/home/$USER}
+
+# Create group if it doesn't exist
+getent group "$GROUP_ID" > /dev/null 2>&1 || groupadd -g "$GROUP_ID" "$USER" > /dev/null 2>&1
+
+# Create user if it doesn't exist
+getent passwd "$USER_ID" > /dev/null 2>&1 || useradd -m -d "$HOME" -u "$USER_ID" -g "$GROUP_ID" -s /bin/bash "$USER" > /dev/null 2>&1
+
+# Ensure configuration directories exist and are owned by the user
+# This is important for persisting sessions via docker volumes
+mkdir -p "$HOME/.config/github-copilot" "$HOME/.copilot"
+chown -R "$USER_ID:$GROUP_ID" "$HOME/.config" "$HOME/.copilot"
+
+# Drop root privileges and execute the command as the mapped host user
+exec gosu "${USER_ID}:${GROUP_ID}" "$@"
