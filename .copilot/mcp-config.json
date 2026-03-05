@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "sequentialthinking": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "/usr/local/bin/mcp-server-sequential-thinking",
+      "args": []
+    },
+    "ref": {
+      "tools": [
+        "*"
+      ],
+      "type": "http",
+      "url": "https://api.ref.tools/mcp",
+      "headers": {
+        "x-ref-api-key": "${REF_API_KEY}"
+      }
+    },
+    "fetch": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--cpus=2",
+        "--memory=256M",
+        "-i",
+        "--network=host",
+        "mcp/fetch"
+      ]
+    },
+    "time": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--cpus=2",
+        "--memory=256M",
+        "-i",
+        "--network=host",
+        "-e",
+        "LOCAL_TIMEZONE",
+        "mcp/time"
+      ]
+    }
+  }
+}

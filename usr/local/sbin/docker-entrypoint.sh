@@ -15,6 +15,12 @@ getent passwd "$USER_ID" > /dev/null 2>&1 || useradd -m -d "$HOME" -u "$USER_ID"
 # Ensure configuration directories exist and are owned by the user
 # This is important for persisting sessions via docker volumes
 mkdir -p "$HOME/.config/github-copilot" "$HOME/.copilot"
+
+# Populate the user's .copilot configuration with defaults if not present
+if [ -d "/etc/copilot" ]; then
+    cp -rn /etc/copilot/. "$HOME/.copilot/" 2>/dev/null || true
+fi
+
 chown -R "$USER_ID:$GROUP_ID" "$HOME/.config" "$HOME/.copilot"
 
 # Drop root privileges and execute the command as the mapped host user

@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
 
 # Setup unprivileged user defaults
 COPY usr/ /usr/
+COPY .copilot/ /etc/copilot/
 RUN chmod +x /usr/local/sbin/docker-entrypoint.sh
 
 # Copy the pre-compiled binary from the builder stage

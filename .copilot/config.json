@@ -1,0 +1,11 @@
+{
+  "banner": "never",
+  "beep": false,
+  "model": "claude-opus-4.5",
+  "render_markdown": true,
+  "screen_reader": false,
+  "theme": "dark",
+  "trusted_folders": [
+    "/workspace"
+  ]
+}

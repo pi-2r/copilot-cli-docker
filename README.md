@@ -6,6 +6,7 @@ Cette approche s'inspire de [gemini-cli-docker-plus](https://github.com/pi-2r/ge
 
 ## Fonctionnalités
 - Image minimale basée sur `debian:bookworm-slim` multi-étapes.
+- **Inclusion par défaut des configurations, agents et compétences (dossier `.copilot`) prêts à l'emploi.**
 - Résout le problème des permissions de fichiers montés (via `gosu`).
 - Configuration persistante de l'authentification (sessions prolongées).
 - Execution transparente via un simple alias Bash.
@@ -38,7 +39,7 @@ source ~/.bashrc
 ```
 
 ### 2. Authentification
-Une fois l'alias configuré, exécutez simplement la commande `copilot` (sans arguments ou avec `/login`) pour vous connecter. La configuration sera sauvegardée localement dans votre répertoire `~/.config/github-copilot` grâce aux volumes Docker.
+Une fois l'alias configuré, exécutez simplement la commande `copilot` (sans arguments ou avec `/login`) pour vous connecter. La configuration sera sauvegardée localement dans votre répertoire `~/.config/github-copilot` grâce aux volumes Docker. Le dossier `~/.copilot` (contenant les agents et configs) sera automatiquement initialisé au premier lancement s'il est vide.
 
 ```bash
 copilot /login
