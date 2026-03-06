@@ -23,5 +23,10 @@ fi
 
 chown -R "$USER_ID:$GROUP_ID" "$HOME/.config" "$HOME/.copilot"
 
+# Grant the user access to the mapped Docker socket if it exists
+if [ -S /var/run/docker.sock ]; then
+    chmod 666 /var/run/docker.sock 2>/dev/null || true
+fi
+
 # Drop root privileges and execute the command as the mapped host user
 exec gosu "${USER_ID}:${GROUP_ID}" "$@"
