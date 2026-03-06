@@ -53,7 +53,7 @@ copilot "Explain how to use docker-compose"
 ### 3. GitHub Token (PAT)
 
 **[EN] Creating a GitHub PAT for Copilot**
-* Go to GitHub Personal Access Tokens
+* Go to [GitHub Personal Access Tokens](https://github.com/settings/personal-access-tokens/new)
 * Create a fine-grained PAT
 * Under "Permissions", click "Add permissions"
 * Select "Copilot Requests" (read and write)
