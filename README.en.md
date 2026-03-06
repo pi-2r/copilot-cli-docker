@@ -49,3 +49,19 @@ Then you can use `copilot` exactly as if the tool was installed natively on your
 ```bash
 copilot "Explain how to use docker-compose"
 ```
+
+### 3. GitHub Token (PAT)
+
+**[EN] Creating a GitHub PAT for Copilot**
+* Go to GitHub Personal Access Tokens
+* Create a fine-grained PAT
+* Under "Permissions", click "Add permissions"
+* Select "Copilot Requests" (read and write)
+* Generate and save your token
+
+You also need to add these variables to your `~/.bash_profile`:
+
+```bash
+export GITHUB_TOKEN="github_pat_****"
+export GH_TOKEN=$GITHUB_TOKEN
+```
