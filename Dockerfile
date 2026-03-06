@@ -8,10 +8,18 @@ RUN apt-get update && apt-get install -y ca-certificates curl tar
 
 WORKDIR /tmp
 RUN set -ex; \
-    if [ "${COPILOT_CLI_VERSION}" = "latest" ]; then \
-      curl -fsSL https://github.com/github/copilot-cli/releases/latest/download/copilot-linux-x64.tar.gz -o copilot.tar.gz; \
+    ARCH=$(dpkg --print-architecture); \
+    if [ "$ARCH" = "amd64" ]; then \
+      COPI_ARCH="x64"; \
+    elif [ "$ARCH" = "arm64" ]; then \
+      COPI_ARCH="arm64"; \
     else \
-      curl -fsSL https://github.com/github/copilot-cli/releases/download/${COPILOT_CLI_VERSION}/copilot-linux-x64.tar.gz -o copilot.tar.gz; \
+      echo "Unsupported architecture: $ARCH"; exit 1; \
+    fi; \
+    if [ "${COPILOT_CLI_VERSION}" = "latest" ]; then \
+      curl -fsSL https://github.com/github/copilot-cli/releases/latest/download/copilot-linux-${COPI_ARCH}.tar.gz -o copilot.tar.gz; \
+    else \
+      curl -fsSL https://github.com/github/copilot-cli/releases/download/${COPILOT_CLI_VERSION}/copilot-linux-${COPI_ARCH}.tar.gz -o copilot.tar.gz; \
     fi && \
     tar -xzf copilot.tar.gz && \
     chmod +x copilot
