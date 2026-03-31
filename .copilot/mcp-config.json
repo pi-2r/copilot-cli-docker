@@ -51,6 +51,24 @@
         "LOCAL_TIMEZONE",
         "mcp/time"
       ]
+    },
+    "aws-documentation-mcp-server": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--network=host",
+        "-e",
+        "FASTMCP_LOG_LEVEL=ERROR",
+        "-e",
+        "AWS_DOCUMENTATION_PARTITION=aws",
+        "awslabs/aws-documentation-mcp-server:latest"
+      ]
     }
   }
 }

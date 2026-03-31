@@ -39,6 +39,10 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     nodejs \
     npm \
+    jq \
+    python3-pip \
+    openssh-client \
+    && pip3 install --break-system-packages git-filter-repo \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Sequential Thinking MCP server globally and link it where mcp-config expects it
